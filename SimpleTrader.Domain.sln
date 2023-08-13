@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleTrader.Domain", "Simp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleTrader.EntityFramework", "SimpleTrader.EntityFramework\SimpleTrader.EntityFramework.csproj", "{53D5323F-2BF1-42A2-B699-90DE43C71FC7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{5E896C80-14C9-4750-BFEF-ABF85C47353D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTrader.WPF", "SimpleTrader.WPF\SimpleTrader.WPF.csproj", "{DC4EF5AC-9E70-465D-9130-44EC4EE4B27C}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{53D5323F-2BF1-42A2-B699-90DE43C71FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53D5323F-2BF1-42A2-B699-90DE43C71FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53D5323F-2BF1-42A2-B699-90DE43C71FC7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E896C80-14C9-4750-BFEF-ABF85C47353D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E896C80-14C9-4750-BFEF-ABF85C47353D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E896C80-14C9-4750-BFEF-ABF85C47353D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E896C80-14C9-4750-BFEF-ABF85C47353D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DC4EF5AC-9E70-465D-9130-44EC4EE4B27C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC4EF5AC-9E70-465D-9130-44EC4EE4B27C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC4EF5AC-9E70-465D-9130-44EC4EE4B27C}.Release|Any CPU.ActiveCfg = Release|Any CPU
