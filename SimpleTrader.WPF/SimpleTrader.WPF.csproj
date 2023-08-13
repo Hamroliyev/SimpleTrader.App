@@ -11,8 +11,4 @@
     <ProjectReference Include="..\SimpleTrader.EntityFramework\SimpleTrader.EntityFramework.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-
 </Project>
