@@ -12,8 +12,8 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Simple Trader"/>
-        <Grid Grid.Row="1">
+        <TextBlock Grid.Row="0" Text="Simple Trader" Background="{StaticResource BrushPrimary1}"/>
+        <Grid Grid.Row="1" Background="{StaticResource BrushPrimary2}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
