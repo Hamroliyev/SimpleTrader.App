@@ -17,7 +17,7 @@ namespace SimpleTrader.FinancialModelingPrepAPI.Services
             using (HttpClient client = new HttpClient())
             {
                 string uri = "https://financialmodelingprep.com/api/v3/major-indexes/" + GetUriSuffix(indexType);
-                HttpResponseMessage response = await client.GetAsync("https://financialmodelingprep.com/api/v3/major-indexes/.DJI");
+                HttpResponseMessage response = await client.GetAsync(uri);
                 string jsonResponse = await response.Content.ReadAsStringAsync();
 
                 MajorIndex majorIndex = JsonConvert.DeserializeObject<MajorIndex>(jsonResponse);
