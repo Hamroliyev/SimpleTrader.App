@@ -8,10 +8,22 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.WPF.ViewModels
 {
-    public class MajorIndexViewModel
+    public class MajorIndexViewModel : ViewModelBase
     {
         private readonly IMajorIndexService _majorIndexService;
-        public MajorIndex DowJones { get; set; }
+        private MajorIndex _dowJones;
+        public MajorIndex DowJones
+        {
+            get
+            {
+                return _dowJones;
+            }
+            set
+            {
+                _dowJones = value;
+                OnPropertyChanged(nameof(_dowJones));
+            }
+        }
         public MajorIndex Nasdaq { get; set; }
         public MajorIndex SP500 { get; set; }
         public MajorIndexViewModel(IMajorIndexService majorIndexService)
