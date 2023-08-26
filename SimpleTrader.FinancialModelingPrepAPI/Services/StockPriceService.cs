@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SimpleTrader.Domain.Exceptions;
 using SimpleTrader.Domain.Services;
 using SimpleTrader.FinancialModelingPrepAPI.Result;
 using System;
@@ -19,6 +20,12 @@ namespace SimpleTrader.FinancialModelingPrepAPI.Services
                 string uri = "otc/real-time-price/" + symbol;
 
                 StockPriceResult stockPriceResult = await client.GetAsync<StockPriceResult>(uri);
+
+                if (stockPriceResult.Price == 0)
+                {
+                    throw new InvalidSymbolException(symbol);
+                }
+
                 return stockPriceResult.Price;
             }
         }
