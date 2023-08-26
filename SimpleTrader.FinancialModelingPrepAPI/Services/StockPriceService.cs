@@ -14,14 +14,11 @@ namespace SimpleTrader.FinancialModelingPrepAPI.Services
     {
         public async Task<double> GetPrice(string symbol)
         {
-            using (HttpClient client = new HttpClient())
+            using (FinancilaModelingPrepHttpClient client = new FinancilaModelingPrepHttpClient())
             {
-                string uri = "https://financialmodelingprep.com/api/v3/otc/real-time-price/" + symbol;
-                HttpResponseMessage response = await client.GetAsync(uri);
-                string jsonResponse = await response.Content.ReadAsStringAsync();
+                string uri = "otc/real-time-price/" + symbol;
 
-                StockPriceResult stockPriceResult = JsonConvert.DeserializeObject<StockPriceResult>(jsonResponse);
-
+                StockPriceResult stockPriceResult = await client.GetAsync<StockPriceResult>(uri);
                 return stockPriceResult.Price;
             }
         }
