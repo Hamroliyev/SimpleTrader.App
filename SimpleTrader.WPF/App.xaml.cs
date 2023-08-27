@@ -20,7 +20,8 @@ namespace SimpleTrader.WPF
             Window window = new MainWindow();
             window.DataContext = new MainViewModel();
             window.Show();
- 
+
+            new StockPriceService().GetPrice("AAPL");
             base.OnStartup(e);
         }
     }
