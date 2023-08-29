@@ -16,7 +16,7 @@ namespace SimpleTrader.EntityFramework
         public DbSet<AssetTransaction> AssetTransactions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AssetTransaction>().OwnsOne(a => a.Stock);
+            modelBuilder.Entity<AssetTransaction>().OwnsOne(a => a.Asset);
 
             base.OnModelCreating(modelBuilder);
         }
