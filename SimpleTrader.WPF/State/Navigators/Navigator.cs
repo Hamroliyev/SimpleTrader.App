@@ -1,12 +1,7 @@
 ﻿using SimpleTrader.WPF.Commands;
 using SimpleTrader.WPF.Models;
 using SimpleTrader.WPF.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SimpleTrader.WPF.ViewModels.Factories;
 using System.Windows.Input;
 
 namespace SimpleTrader.WPF.State.Navigators
@@ -27,6 +22,11 @@ namespace SimpleTrader.WPF.State.Navigators
             }
         }
 
-        public ICommand UpdateCurentViewModelCommand => new UpdateCurrentViewModelCommand(this);
+        public ICommand UpdateCurentViewModelCommand { get; set; }
+
+        public Navigator(ISimpleTraderViewModelAbstractFactory viewModelFactory)
+        {
+            UpdateCurentViewModelCommand = new UpdateCurrentViewModelCommand(this, viewModelFactory);
+        }
     }
 }

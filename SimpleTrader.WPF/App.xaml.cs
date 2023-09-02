@@ -7,6 +7,7 @@ using SimpleTrader.EntityFramework.Services;
 using SimpleTrader.FinancialModelingPrepAPI.Services;
 using SimpleTrader.WPF.State.Navigators;
 using SimpleTrader.WPF.ViewModels;
+using SimpleTrader.WPF.ViewModels.Factories;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -28,8 +29,7 @@ namespace SimpleTrader.WPF
 
             IBuyStockService buyStockService = serviceProvider.GetRequiredService<IBuyStockService>();
 
-            Window window = new MainWindow();
-            window.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
+            Window window =  serviceProvider.GetRequiredService<MainWindow>();
             window.Show();
 
             base.OnStartup(e);
@@ -43,9 +43,17 @@ namespace SimpleTrader.WPF
             services.AddSingleton<IDataService<Account>, AccountDataService>();
             services.AddSingleton<IStockPriceService, StockPriceService>();
             services.AddSingleton<IBuyStockService, BuyStockService>();
+            services.AddSingleton<IMajorIndexService, MajorIndexService>();
+
+            services.AddSingleton<ISimpleTraderViewModelAbstractFactory, SimpleTraderViewModelAbstractFactory>();
+            services.AddSingleton<ISimpleTraderViewModelFactory<HomeViewModel>, HomeViewModelFactory>();
+            services.AddSingleton<ISimpleTraderViewModelFactory<PortfolioViewModel>, PortfolioViewModelFactory>();
+            services.AddSingleton<ISimpleTraderViewModelFactory<MajorIndexListingViewModel>, MajorIndexListingViewModelFactory>();
 
             services.AddScoped<INavigator, Navigator>();
             services.AddScoped<MainViewModel>();
+
+            services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainViewModel>()));
 
             return services.BuildServiceProvider();
         }
