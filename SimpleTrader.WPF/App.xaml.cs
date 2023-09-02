@@ -1,4 +1,11 @@
-﻿using SimpleTrader.FinancialModelingPrepAPI.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SimpleTrader.Domain.Models;
+using SimpleTrader.Domain.Services;
+using SimpleTrader.Domain.Services.TransactionService;
+using SimpleTrader.EntityFramework;
+using SimpleTrader.EntityFramework.Services;
+using SimpleTrader.FinancialModelingPrepAPI.Services;
+using SimpleTrader.WPF.State.Navigators;
 using SimpleTrader.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,12 +24,30 @@ namespace SimpleTrader.WPF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            IServiceProvider serviceProvider = CreateServiceProvider();
+
+            IBuyStockService buyStockService = serviceProvider.GetRequiredService<IBuyStockService>();
+
             Window window = new MainWindow();
-            window.DataContext = new MainViewModel();
+            window.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
             window.Show();
 
-            new StockPriceService().GetPrice("AAPL");
             base.OnStartup(e);
+        }
+
+        private IServiceProvider CreateServiceProvider()
+        {
+            IServiceCollection services = new ServiceCollection();
+
+            services.AddSingleton<SimpleTraderDbContextFactory>();
+            services.AddSingleton<IDataService<Account>, AccountDataService>();
+            services.AddSingleton<IStockPriceService, StockPriceService>();
+            services.AddSingleton<IBuyStockService, BuyStockService>();
+
+            services.AddScoped<INavigator, Navigator>();
+            services.AddScoped<MainViewModel>();
+
+            return services.BuildServiceProvider();
         }
     }
 }
