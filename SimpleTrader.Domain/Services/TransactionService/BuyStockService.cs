@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.Domain.Services.TransactionService
 {
-    public class BuyStockService : IBuyStuckService
+    public class BuyStockService : IBuyStockService
     {
         private readonly IStockPriceService _stockPriceService;
         private readonly IDataService<Account> _accountService;

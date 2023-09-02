@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.Domain.Services.TransactionService
 {
-    public interface IBuyStuckService
+    public interface IBuyStockService
     {
         Task<Account> BuyStock(Account buyer, string symbol, int shares);
     }
