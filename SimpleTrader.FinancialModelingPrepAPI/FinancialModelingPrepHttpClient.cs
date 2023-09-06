@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.FinancialModelingPrepAPI
 {
-    public class FinancilaModelingPrepHttpClient: HttpClient
+    public class FinancialModelingPrepHttpClient: HttpClient
     {
         private readonly string apiKey;
 
-        public FinancilaModelingPrepHttpClient(string apiKey)
+        public FinancialModelingPrepHttpClient(string apiKey)
         {
             this.BaseAddress = new Uri("https://financialmodelingprep.com/api/v3/");
             this.apiKey = apiKey;
@@ -20,7 +20,7 @@ namespace SimpleTrader.FinancialModelingPrepAPI
 
         public async Task<T> GetAsync<T>(string uri)
         {
-            HttpResponseMessage response = await GetAsync($"{uri}?apikey=6fe66fe1c6a9acc242b9b2c3cae64efe");
+            HttpResponseMessage response = await GetAsync($"{uri}?apikey={apiKey}");
             string jsonResponse = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<T>(jsonResponse);
