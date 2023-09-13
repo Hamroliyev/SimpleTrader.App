@@ -6,7 +6,49 @@
              xmlns:local="clr-namespace:SimpleTrader.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Buy Stocks"/>
+    <Grid Margin="20" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="0" HorizontalAlignment="Center">
+            <TextBox Width="100" Text="{Binding Symbol, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Search" Command="{Binding SearchSymbolCommand}"
+                    Margin="10 0"/>
+        </WrapPanel>
+
+        <WrapPanel Grid.Row="1" Margin="0 10 0 0">
+            <Border BorderBrush="Black" BorderThickness="1" 
+                    Padding="20">
+                <StackPanel>
+                    <TextBlock FontSize="32" 
+                               HorizontalAlignment="Center"
+                               Text="{Binding Symbol}"/>
+                    <TextBlock Text="{Binding StockPrice,StringFormat={}{0:C}}" 
+                               Margin="0 10 0 0"/>
+                </StackPanel>
+            </Border>
+
+            <Border BorderBrush="Black" BorderThickness="1"
+                    Padding="20">
+                <StackPanel VerticalAlignment="Center">
+                    <WrapPanel Margin="0 10">
+                        <TextBlock Width="150" Text="Shares to Buy :"/>
+                        <TextBox Width="50" Text="{Binding SharesToBuy, UpdateSourceTrigger=PropertyChanged}"/>
+                    </WrapPanel>
+                    <WrapPanel Margin="0 10">
+                        <TextBlock Width="150" Text="Price per share :"/>
+                        <TextBox Width="50" Text="{Binding StockPrice,StringFormat={}{0:C}}"/>
+                    </WrapPanel>
+
+                    <TextBlock Margin="0 10" FontSize="32" 
+                               HorizontalAlignment="Center"
+                               Text="{Binding TotalPrice, StringFormat={}{0:C}}"/>
+                    <Button Margin="0 10" Content="Buy" Command="{Binding BuyStockCommand}"/>
+                </StackPanel>
+            </Border>
+        </WrapPanel>
+        
     </Grid>
 </UserControl>
