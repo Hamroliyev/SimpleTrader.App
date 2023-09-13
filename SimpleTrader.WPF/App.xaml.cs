@@ -53,6 +53,7 @@ namespace SimpleTrader.WPF
             services.AddScoped<MainViewModel>();
 
             services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainViewModel>()));
+            services.AddScoped<BuyViewModel>();
 
             return services.BuildServiceProvider();
         }
