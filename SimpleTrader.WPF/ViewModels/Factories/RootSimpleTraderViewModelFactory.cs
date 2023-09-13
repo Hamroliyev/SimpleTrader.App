@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.WPF.ViewModels.Factories
 {
-    public class SimpleTraderViewModelAbstractFactory : ISimpleTraderViewModelAbstractFactory
+    public class RootSimpleTraderViewModelFactory : IRootSimpleTraderViewModelFactory
     {
         private readonly ISimpleTraderViewModelFactory<HomeViewModel> _homeViewModelFactory;
         private readonly ISimpleTraderViewModelFactory<PortfolioViewModel> _portfolioViewModelFactory;
         private readonly BuyViewModel _buyViewModel;
 
-        public SimpleTraderViewModelAbstractFactory(ISimpleTraderViewModelFactory<HomeViewModel> homeViewModelFactory,
+        public RootSimpleTraderViewModelFactory(ISimpleTraderViewModelFactory<HomeViewModel> homeViewModelFactory,
                ISimpleTraderViewModelFactory<PortfolioViewModel> portfolioViewModelFactory,
                BuyViewModel buyViewModel)
         {
