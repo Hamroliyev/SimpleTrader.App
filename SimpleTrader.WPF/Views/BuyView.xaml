@@ -24,7 +24,7 @@
                 <StackPanel>
                     <TextBlock FontSize="32" 
                                HorizontalAlignment="Center"
-                               Text="{Binding Symbol}"/>
+                               Text="{Binding SearchResultSymbol}"/>
                     <TextBlock Text="{Binding StockPrice,StringFormat={}{0:C}}" 
                                Margin="0 10 0 0"/>
                 </StackPanel>
