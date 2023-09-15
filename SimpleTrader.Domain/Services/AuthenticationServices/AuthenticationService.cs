@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using SimpleTrader.Domain.Exceptions;
 using SimpleTrader.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace SimpleTrader.Domain.Services.AuthenticationServices
 
             if (passwordVerificationResult != PasswordVerificationResult.Success)
             {
-                throw new Exception();
+                throw new InvalidPasswordException(userName, password);
             }
 
             return storedAccount;
