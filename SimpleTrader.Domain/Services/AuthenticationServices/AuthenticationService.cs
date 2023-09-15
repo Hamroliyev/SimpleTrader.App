@@ -33,46 +33,48 @@ namespace SimpleTrader.Domain.Services.AuthenticationServices
             return storedAccount;
         }
 
-        public async Task<bool> Register(string email, string userName, string password, string confirmPassword)
+        public async Task<RegistrationResult> Register(string email, string userName, string password, string confirmPassword)
         {
-            bool success = false;
+            RegistrationResult result = RegistrationResult.Success;
 
             if (password != confirmPassword)
             {
-                throw new Exception();
+                result = RegistrationResult.PasswordsDoNotMatch;
             }
 
             Account emailAccount = await _accountService.GetByEmail(email);
             if (emailAccount != null)
             {
-                throw new Exception();
+                result = RegistrationResult.EmailAlreadyExists;
             }
 
             Account usernameAccount = await _accountService.GetByUsername(userName);
             if (usernameAccount != null)
             {
-                throw new Exception();
+                result = RegistrationResult.UserNameAlreadyExists;
             }
 
-            string hashedPassword = _passwordHasher.HashPassword(password);
-
-            User user = new User()
+            if (result == RegistrationResult.Success)
             {
-                Email = email,
-                Username = userName,
-                PasswordHash = hashedPassword,
-                DateJoined = DateTime.Now
-            };
+                string hashedPassword = _passwordHasher.HashPassword(password);
 
-            Account account = new Account()
-            {
-                AccountHolder = user
-            };
+                User user = new User()
+                {
+                    Email = email,
+                    Username = userName,
+                    PasswordHash = hashedPassword,
+                    DateJoined = DateTime.Now
+                };
 
-            await _accountService.Create(account);
+                Account account = new Account()
+                {
+                    AccountHolder = user
+                };
 
+                await _accountService.Create(account);
+            }
 
-            return success;
+            return result;
         }
     }
 }
