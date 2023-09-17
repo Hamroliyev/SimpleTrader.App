@@ -7,6 +7,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Username"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Password"/>
+        <PasswordBox x:Name="pbPassword" Grid.Row="1" Grid.Column="1"/>
+
+        <Button Grid.Row="2" x:Name="Login"
+                Content="Login"
+                HorizontalAlignment="Center"/>
+
     </Grid>
 </UserControl>
