@@ -25,7 +25,8 @@
 
         <Button Grid.Row="2" x:Name="Login"
                 Content="Login"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center"
+                Click="Login_Click"/>
 
     </Grid>
 </UserControl>

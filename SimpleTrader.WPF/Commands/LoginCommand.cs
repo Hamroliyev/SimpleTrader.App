@@ -29,7 +29,7 @@ namespace SimpleTrader.WPF.Commands
 
         public async void Execute(object parameter)
         {
-            await _authenticator.Login(_loginViewModel.UserName, string.Empty);
+            bool success = await _authenticator.Login(_loginViewModel.UserName, parameter.ToString());
         }
     }
 }
