@@ -10,9 +10,13 @@
     <UserControl.Background>
         <ImageBrush ImageSource="/Resources/abstract-digital-grid-black-background.jpg" Stretch="UniformToFill" Opacity="0.9"/>
     </UserControl.Background>
-    <Border HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="2" BorderBrush="{StaticResource BrushPrimary2}"
+    <Border HorizontalAlignment="Center" VerticalAlignment="Center" 
+            BorderThickness="2" BorderBrush="{StaticResource BrushPrimary2}"
             Background="White"
             CornerRadius="10" Padding="50" Margin="25">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" Color="Gray"/>
+        </Border.Effect>
         <Grid Grid.IsSharedSizeScope="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
