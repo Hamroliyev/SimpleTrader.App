@@ -21,10 +21,5 @@ namespace SimpleTrader.WPF.State.Navigators
                 OnPropertyChanged(nameof(CurrentViewModel));
             }
         }
-
-        public Navigator(IRootSimpleTraderViewModelFactory viewModelFactory)
-        {
-            UpdateCurentViewModelCommand = new UpdateCurrentViewModelCommand(this, viewModelFactory);
-        }
     }
 }
