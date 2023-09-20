@@ -14,13 +14,13 @@ namespace SimpleTrader.WPF.Commands
     {
         private readonly LoginViewModel _loginViewModel;
         private readonly IAuthenticator _authenticator;
-        private readonly INavigator _navigator;
+        private readonly IRenavigator _renavigator;
 
-        public LoginCommand(LoginViewModel loginViewModel, IAuthenticator authenticator, INavigator navigator)
+        public LoginCommand(LoginViewModel loginViewModel, IAuthenticator authenticator, IRenavigator renavigator)
         {
             _loginViewModel = loginViewModel;
             _authenticator = authenticator;
-            _navigator = navigator;
+            _renavigator = renavigator;
         }
 
         public event EventHandler CanExecuteChanged;
@@ -36,7 +36,7 @@ namespace SimpleTrader.WPF.Commands
 
             if (success)
             {
-                _navigator.UpdateCurentViewModelCommand.Execute(ViewType.Home);
+                _renavigator.Renavigate();
             }
         }
     }
