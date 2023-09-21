@@ -5,19 +5,20 @@ namespace SimpleTrader.WPF.ViewModels.Factories
 {
     public class SimpleTraderViewModelFactory : ISimpleTraderViewModelFactory
     {
-        private readonly ISimpleTraderViewModelFactory<HomeViewModel> _homeViewModelFactory;
-        private readonly ISimpleTraderViewModelFactory<PortfolioViewModel> _portfolioViewModelFactory;
-        private readonly ISimpleTraderViewModelFactory<LoginViewModel> _loginViewModelFactory;
-        private readonly BuyViewModel _buyViewModel;
+        private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
+        private readonly CreateViewModel<PortfolioViewModel> _createPortfolioViewModel;
+        private readonly CreateViewModel<LoginViewModel> _createLoginViewModel;
+        private readonly CreateViewModel<BuyViewModel> _createBuyViewModel;
 
-        public SimpleTraderViewModelFactory(ISimpleTraderViewModelFactory<HomeViewModel> homeViewModelFactory,
-               ISimpleTraderViewModelFactory<PortfolioViewModel> portfolioViewModelFactory,
-               BuyViewModel buyViewModel, ISimpleTraderViewModelFactory<LoginViewModel> loginViewModelFactory)
+        public SimpleTraderViewModelFactory(CreateViewModel<HomeViewModel> createHomeViewModel,
+            CreateViewModel<PortfolioViewModel> createPortfolioViewModel,
+            CreateViewModel<LoginViewModel> creteLoginViewModel,
+            CreateViewModel<BuyViewModel> createBuyViewModel)
         {
-            _homeViewModelFactory = homeViewModelFactory;
-            _portfolioViewModelFactory = portfolioViewModelFactory;
-            _buyViewModel = buyViewModel;
-            _loginViewModelFactory = loginViewModelFactory;
+            _createHomeViewModel = createHomeViewModel;
+            _createPortfolioViewModel = createPortfolioViewModel;
+            _createLoginViewModel = creteLoginViewModel;
+            _createBuyViewModel = createBuyViewModel;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -25,13 +26,13 @@ namespace SimpleTrader.WPF.ViewModels.Factories
             switch (viewType)
             {
                 case ViewType.Home:
-                    return _homeViewModelFactory.CreateViewModel();
+                    return _createHomeViewModel();
                 case ViewType.Portfolio:
-                    return _portfolioViewModelFactory.CreateViewModel();
+                    return _createPortfolioViewModel();
                 case ViewType.Buy:
-                    return _buyViewModel;
+                    return _createBuyViewModel();
                 case ViewType.Login:
-                    return _loginViewModelFactory.CreateViewModel();
+                    return _createLoginViewModel();
                 default:
                     throw new ArgumentException("The viewType does not have a viewModel.",nameof(viewType));
             }
