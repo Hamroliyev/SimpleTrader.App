@@ -3,14 +3,14 @@ using System;
 
 namespace SimpleTrader.WPF.ViewModels.Factories
 {
-    public class RootSimpleTraderViewModelFactory : IRootSimpleTraderViewModelFactory
+    public class SimpleTraderViewModelFactory : ISimpleTraderViewModelFactory
     {
         private readonly ISimpleTraderViewModelFactory<HomeViewModel> _homeViewModelFactory;
         private readonly ISimpleTraderViewModelFactory<PortfolioViewModel> _portfolioViewModelFactory;
         private readonly ISimpleTraderViewModelFactory<LoginViewModel> _loginViewModelFactory;
         private readonly BuyViewModel _buyViewModel;
 
-        public RootSimpleTraderViewModelFactory(ISimpleTraderViewModelFactory<HomeViewModel> homeViewModelFactory,
+        public SimpleTraderViewModelFactory(ISimpleTraderViewModelFactory<HomeViewModel> homeViewModelFactory,
                ISimpleTraderViewModelFactory<PortfolioViewModel> portfolioViewModelFactory,
                BuyViewModel buyViewModel, ISimpleTraderViewModelFactory<LoginViewModel> loginViewModelFactory)
         {
