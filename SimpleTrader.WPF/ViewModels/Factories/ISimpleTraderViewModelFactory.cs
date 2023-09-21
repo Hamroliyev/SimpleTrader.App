@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.WPF.ViewModels.Factories
 {
+
     public interface ISimpleTraderViewModelFactory
     {
         ViewModelBase CreateViewModel(ViewType viewType);
