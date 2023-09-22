@@ -17,17 +17,17 @@
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Authenticator.IsLogedIn}" Value="False">
+                        <DataTrigger Binding="{Binding IsLogedIn}" Value="False">
                             <Setter Property="Visibility" Value="Collapsed"></Setter>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
-            <controls:NavigationBar DataContext="{Binding Navigator}"/>
+            <controls:NavigationBar/>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <ContentControl Content="{Binding Navigator.CurrentViewModel}"/>
+            <ContentControl Content="{Binding CurrentViewModel}"/>
         </ScrollViewer>
     </Grid>
 </Window>
