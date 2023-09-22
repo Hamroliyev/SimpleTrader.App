@@ -2,6 +2,7 @@
 using SimpleTrader.WPF.Models;
 using SimpleTrader.WPF.ViewModels;
 using SimpleTrader.WPF.ViewModels.Factories;
+using System;
 using System.Windows.Input;
 
 namespace SimpleTrader.WPF.State.Navigators
@@ -18,7 +19,10 @@ namespace SimpleTrader.WPF.State.Navigators
             set
             {
                 _currentViewModel = value;
+                StateChanged?.Invoke();
             }
         }
+        public event Action StateChanged;
+
     }
 }

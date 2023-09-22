@@ -27,10 +27,13 @@ namespace SimpleTrader.WPF.State.Authenticators
             private set 
             { 
                 _accountStore.CurrentAccount = value;
+                StateChanged?.Invoke();
             }
         }
 
         public bool IsLoggedIn => CurrentAccount != null;
+
+        public event Action StateChanged;
 
         public async Task<bool> Login(string userName, string password)
         {
