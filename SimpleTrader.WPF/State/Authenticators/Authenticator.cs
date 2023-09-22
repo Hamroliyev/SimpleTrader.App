@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.WPF.State.Authenticators
 {
-    public class Authenticator : ObservableObject, IAuthenticator
+    public class Authenticator : IAuthenticator
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly IAccountStore _accountStore;
@@ -27,8 +27,6 @@ namespace SimpleTrader.WPF.State.Authenticators
             private set 
             { 
                 _accountStore.CurrentAccount = value;
-                OnPropertyChanged(nameof(CurrentAccount));
-                OnPropertyChanged(nameof(IsLoggedIn));
             }
         }
 
