@@ -15,9 +15,10 @@ namespace SimpleTrader.WPF.State.Authenticators
         private readonly IAuthenticationService _authenticationService;
         private readonly IAccountStore _accountStore;
 
-        public Authenticator(IAuthenticationService authenticationService)
+        public Authenticator(IAuthenticationService authenticationService, IAccountStore accountStore)
         {
             _authenticationService = authenticationService;
+            _accountStore = accountStore;
         }
 
         public Account CurrentAccount
@@ -29,11 +30,6 @@ namespace SimpleTrader.WPF.State.Authenticators
                 OnPropertyChanged(nameof(CurrentAccount));
                 OnPropertyChanged(nameof(IsLoggedIn));
             }
-        }
-
-        public Authenticator(IAccountStore accountStore)
-        {
-            _accountStore = accountStore;
         }
 
         public bool IsLoggedIn => CurrentAccount != null;
