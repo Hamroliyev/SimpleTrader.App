@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.WPF.ViewModels
 {
-    public class AssetSummaryViewModel
+    public class AssetSummaryViewModel : ViewModelBase
     {
 
     }
