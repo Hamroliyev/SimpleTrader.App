@@ -20,17 +20,25 @@ namespace SimpleTrader.WPF.ViewModels
             _assetStore = assetStore;
             _assets = new ObservableCollection<AssetViewModel>();
             _assetStore.StateChanged += AssetStore_StateChanged;
+            ResetAssets();
         }
+        private void ResetAssets()
+        {
+            IEnumerable<AssetViewModel> assetViewModels = _assetStore.AssetTransactions
+                .GroupBy(g => g.Asset.Symbol)
+                .Select(g => new AssetViewModel(g.Key, g.Sum(a => a.IsPurchase ? a.Shares : -a.Shares)));
 
+            _assets.Clear();
+            foreach (AssetViewModel assetViewModel in assetViewModels)
+            {
+                _assets.Add(assetViewModel);
+            }
+        }
         private void AssetStore_StateChanged()
         {
             OnPropertyChanged(nameof(AccountBalance));
             ResetAssets();
         }
 
-        private void ResetAssets()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
