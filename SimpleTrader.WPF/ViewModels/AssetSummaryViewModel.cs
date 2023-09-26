@@ -1,10 +1,7 @@
 ﻿using SimpleTrader.WPF.State.Assets;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleTrader.WPF.ViewModels
 {
@@ -26,7 +23,8 @@ namespace SimpleTrader.WPF.ViewModels
         {
             IEnumerable<AssetViewModel> assetViewModels = _assetStore.AssetTransactions
                 .GroupBy(g => g.Asset.Symbol)
-                .Select(g => new AssetViewModel(g.Key, g.Sum(a => a.IsPurchase ? a.Shares : -a.Shares)));
+                .Select(g => new AssetViewModel(g.Key, g.Sum(a => a.IsPurchase ? a.Shares : -a.Shares)))
+                .Where(a => a.Shares > 0);
 
             _assets.Clear();
             foreach (AssetViewModel assetViewModel in assetViewModels)
