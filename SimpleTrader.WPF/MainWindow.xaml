@@ -7,22 +7,25 @@
         xmlns:controls="clr-namespace:SimpleTrader.WPF.Controls"
         xmlns:viewModel="clr-namespace:SimpleTrader.WPF.ViewModels"
         mc:Ignorable="d"
-        Title="Simple Trader" Height="450" Width="800">
+        Title="Simple Trader" Height="450" Width="800"
+        MinWidth="600" MinHeight="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
         <Grid Grid.Row="0">
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsLogedIn}" Value="False">
-                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                        <DataTrigger Binding="{Binding IsLoggedIn}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
+
             <controls:NavigationBar/>
         </Grid>
 

@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace SimpleTrader.WPF.Converters
 {
-    public class EqualValueToParametrConverter : IValueConverter
+    public class EqualValueToParameterConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

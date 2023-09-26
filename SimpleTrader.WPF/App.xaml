@@ -7,25 +7,26 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/Common.xaml"/>
-                <ResourceDictionary Source="/Styles/NavigationBar.xaml"/>
+                <ResourceDictionary Source="/Styles/Common.xaml" />
+                <ResourceDictionary Source="/Styles/NavigationBar.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
-                <views:HomeView/>
+                <views:HomeView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:PortfolioViewModel}">
-                <views:PortfolioView/>
+                <views:PortfolioView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:BuyViewModel}">
-                <views:BuyView/>
+                <views:BuyView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                <views:LoginView LoginCommand="{Binding LoginCommand}"/>
+                <views:LoginView />
             </DataTemplate>
+
         </ResourceDictionary>
-         
     </Application.Resources>
 </Application>
