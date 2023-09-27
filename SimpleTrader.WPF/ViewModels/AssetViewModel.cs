@@ -1,6 +1,6 @@
 ﻿namespace SimpleTrader.WPF.ViewModels
 {
-    public class AssetViewModel
+    public class AssetViewModel : ViewModelBase
     {
         public string Symbol { get; }
         public int Shares { get; }

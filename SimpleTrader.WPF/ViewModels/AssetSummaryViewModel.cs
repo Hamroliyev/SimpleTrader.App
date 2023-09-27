@@ -24,7 +24,8 @@ namespace SimpleTrader.WPF.ViewModels
             IEnumerable<AssetViewModel> assetViewModels = _assetStore.AssetTransactions
                 .GroupBy(g => g.Asset.Symbol)
                 .Select(g => new AssetViewModel(g.Key, g.Sum(a => a.IsPurchase ? a.Shares : -a.Shares)))
-                .Where(a => a.Shares > 0);
+                .Where(a => a.Shares > 0)
+                .Take(3);
 
             _topAssets.Clear();
             foreach (AssetViewModel assetViewModel in assetViewModels)
