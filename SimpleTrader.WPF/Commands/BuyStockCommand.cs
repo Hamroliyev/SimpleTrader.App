@@ -54,7 +54,7 @@ namespace SimpleTrader.WPF.Commands
             }
             catch (InvalidSymbolException)
             {
-                _buyViewModel.ErrorMessage = "Symbol does not exist."
+                _buyViewModel.ErrorMessage = "Symbol does not exist.";
             }
             catch (Exception)
             {

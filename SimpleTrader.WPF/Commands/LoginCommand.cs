@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace SimpleTrader.WPF.Commands
 {
-    public class LoginCommand : ICommand
+    public class LoginCommand : AsyncCommandBase
     {
         private readonly LoginViewModel _loginViewModel;
         private readonly IAuthenticator _authenticator;
@@ -24,14 +24,7 @@ namespace SimpleTrader.WPF.Commands
             _renavigator = renavigator;
         }
 
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public async void Execute(object parameter)
+        public override async Task ExecuteAsync(object parameter)
         {
             try
             {
