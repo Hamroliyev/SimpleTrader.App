@@ -68,7 +68,15 @@ namespace SimpleTrader.WPF.ViewModels
         }
 
         public MessageViewModel ErrorMessageViewModel { get; }
+        public string ErrorMessage
+        {
+            set => ErrorMessageViewModel.Message = value;
+        }
         public MessageViewModel StatusMessageViewModel { get; }
+        public string StatusMessage
+        {
+            set => StatusMessageViewModel.Message = value;
+        }
 
         public ICommand SearchSymbolCommand { get; set; }
         public ICommand BuyStockCommand { get; set; }

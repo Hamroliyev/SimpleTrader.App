@@ -36,13 +36,17 @@ namespace SimpleTrader.WPF.Commands
         {
             try
             {
-                Account account = await _buyStockService.BuyStock(_accountStore.CurrentAccount, _buyViewModel.Symbol, _buyViewModel.SharesToBuy);
+                string symbol = _buyViewModel.Symbol;
+                int shares = _buyViewModel.SharesToBuy;
+                Account account = await _buyStockService.BuyStock(_accountStore.CurrentAccount, symbol, shares);
 
                 _accountStore.CurrentAccount = account;
+
+                _buyViewModel.StatusMessage = $"Successfully purchased {shares} shares of {symbol}";
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show(e.Message);
+                _buyViewModel.ErrorMessage = "Transaction failed.";
             }
         }
     }
