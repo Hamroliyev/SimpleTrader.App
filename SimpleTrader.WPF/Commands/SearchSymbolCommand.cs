@@ -1,4 +1,5 @@
-﻿using SimpleTrader.Domain.Services;
+﻿using SimpleTrader.Domain.Exceptions;
+using SimpleTrader.Domain.Services;
 using SimpleTrader.WPF.ViewModels;
 using System;
 using System.Windows;
@@ -32,9 +33,13 @@ namespace SimpleTrader.WPF.Commands
                 _buyViewModel.SearchResultSymbol = _buyViewModel.Symbol.ToUpper();
                 _buyViewModel.StockPrice = stockPrice;
             }
-            catch (Exception e)
+            catch (InvalidSymbolException)
             {
-                MessageBox.Show(e.Message);
+                _buyViewModel.ErrorMessage = "Symbol does not exist.";
+            }
+            catch (Exception)
+            {
+                _buyViewModel.ErrorMessage = "Failed to get symbol information";
             }
         }
     }

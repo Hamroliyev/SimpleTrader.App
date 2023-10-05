@@ -1,4 +1,5 @@
-﻿using SimpleTrader.Domain.Models;
+﻿using SimpleTrader.Domain.Exceptions;
+using SimpleTrader.Domain.Models;
 using SimpleTrader.Domain.Services.TransactionService;
 using SimpleTrader.WPF.State.Accounts;
 using SimpleTrader.WPF.ViewModels;
@@ -34,6 +35,9 @@ namespace SimpleTrader.WPF.Commands
 
         public async void Execute(object parameter)
         {
+            _buyViewModel.ErrorMessage = string.Empty;
+            _buyViewModel.StatusMessage = string.Empty;
+
             try
             {
                 string symbol = _buyViewModel.Symbol;
@@ -43,6 +47,14 @@ namespace SimpleTrader.WPF.Commands
                 _accountStore.CurrentAccount = account;
 
                 _buyViewModel.StatusMessage = $"Successfully purchased {shares} shares of {symbol}";
+            }
+            catch (InsufficientFundsException)
+            {
+                _buyViewModel.ErrorMessage = "Account has insufficient balance. Please transfer more money into your account.";
+            }
+            catch (InvalidSymbolException)
+            {
+                _buyViewModel.ErrorMessage = "Symbol does not exist."
             }
             catch (Exception)
             {
