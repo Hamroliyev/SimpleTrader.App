@@ -15,6 +15,7 @@ namespace SimpleTrader.Domain.Services
         /// <param name="symbol"></param>
         /// <returns>The price of symbol.</returns>
         /// <exception cref="InvalidSymbolException">Thrown if symbol does not exist.</exception>
+        /// <exception cref="Exception">Thrown if getting symbol fails.</exception>
         Task<double> GetPrice(string symbol);
     }
 }
