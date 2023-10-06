@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -46,7 +47,7 @@ namespace SimpleTrader.WPF
                     services.AddSingleton<FinancialModelingPrepHttpClientFactory>(new FinancialModelingPrepHttpClientFactory(apiKey: apiKey));
 
                     string connectionString = context.Configuration.GetConnectionString("default");
-                    services.AddSingleton<SimpleTraderDbContext>(o => o.UseSqlServer(connectionString));
+                    services.AddDbContext<SimpleTraderDbContext>(o => o.UseSqlServer(connectionString));
                     services.AddSingleton<SimpleTraderDbContextFactory>(new SimpleTraderDbContextFactory(connectionString));
                     services.AddSingleton<IAuthenticationService, AuthenticationService>();
                     services.AddSingleton<IDataService<Account>, AccountDataService>();
