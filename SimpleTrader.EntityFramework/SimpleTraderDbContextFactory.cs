@@ -8,12 +8,19 @@ using System.Threading.Tasks;
 
 namespace SimpleTrader.EntityFramework
 {
-    public class SimpleTraderDbContextFactory : IDesignTimeDbContextFactory<SimpleTraderDbContext>
+    public class SimpleTraderDbContextFactory
     {
+        private readonly string _connectionString;
+
+        public SimpleTraderDbContextFactory(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         public SimpleTraderDbContext CreateDbContext(string[] args = null)
         {
             var options = new DbContextOptionsBuilder<SimpleTraderDbContext>();
-            options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=SimpleTraderDB;Trusted_Connection=True;");
+            options.UseSqlServer(_connectionString);
 
             return new SimpleTraderDbContext(options.Options);
         }

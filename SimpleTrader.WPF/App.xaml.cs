@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SimpleTrader.Domain.Models;
@@ -35,12 +36,18 @@ namespace SimpleTrader.WPF
         public static IHostBuilder CreateHostBuilder(string[] args = null)
         {
             return Host.CreateDefaultBuilder(args)
-                .ConfigureServices(services =>
+                .ConfigureAppConfiguration(c =>
+                {
+                    c.AddJsonFile("appsettings.json");
+                })
+                .ConfigureServices((context,services) =>
                 {
                     string apiKey = ConfigurationManager.AppSettings.Get("financeApiKey");
                     services.AddSingleton<FinancialModelingPrepHttpClientFactory>(new FinancialModelingPrepHttpClientFactory(apiKey: apiKey));
 
-                    services.AddSingleton<SimpleTraderDbContextFactory>();
+                    string connectionString = context.Configuration.GetConnectionString("default");
+                    services.AddSingleton<SimpleTraderDbContext>(o => o.UseSqlServer(connectionString));
+                    services.AddSingleton<SimpleTraderDbContextFactory>(new SimpleTraderDbContextFactory(connectionString));
                     services.AddSingleton<IAuthenticationService, AuthenticationService>();
                     services.AddSingleton<IDataService<Account>, AccountDataService>();
                     services.AddSingleton<IAccountService, AccountDataService>();
