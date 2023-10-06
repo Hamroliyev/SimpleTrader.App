@@ -40,10 +40,11 @@ namespace SimpleTrader.WPF
                 .ConfigureAppConfiguration(c =>
                 {
                     c.AddJsonFile("appsettings.json");
+                    c.AddEnvironmentVariables();
                 })
                 .ConfigureServices((context,services) =>
                 {
-                    string apiKey = ConfigurationManager.AppSettings.Get("financeApiKey");
+                    string apiKey = context.Configuration.GetValue<string>("FINANCE_API_KEY");
                     services.AddSingleton<FinancialModelingPrepHttpClientFactory>(new FinancialModelingPrepHttpClientFactory(apiKey: apiKey));
 
                     string connectionString = context.Configuration.GetConnectionString("default");
