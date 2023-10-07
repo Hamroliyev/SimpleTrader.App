@@ -1,22 +1,22 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="NavButton" TargetType="RadioButton">
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Padding" Value="10 5"/>
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Background" Value="{StaticResource BrushPrimary2}"/>
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="Background" Value="{StaticResource BrushPrimary2}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Grid x:Name="gridMain" Background="{TemplateBinding Background}">
-                        <TextBlock Text="{TemplateBinding Content}"
-                                   Padding="{TemplateBinding Padding}"
-                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                        <TextBlock
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Text="{TemplateBinding Content}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Background" Value="{StaticResource BrushPrimary1}" TargetName="gridMain"/> 
+                            <Setter TargetName="gridMain" Property="Background" Value="{StaticResource BrushPrimary1}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -26,18 +26,24 @@
             <EventTrigger RoutedEvent="MouseEnter">
                 <BeginStoryboard>
                     <Storyboard>
-                        <ColorAnimation To="{StaticResource ColorPrimary1}" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color"/>
+                        <ColorAnimation
+                            Storyboard.TargetProperty="Background.Color"
+                            To="{StaticResource ColorPrimary1}"
+                            Duration="0:0:0.1" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
             <EventTrigger RoutedEvent="MouseLeave">
                 <BeginStoryboard>
                     <Storyboard>
-                        <ColorAnimation To="{StaticResource ColorPrimary2}" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color"/>
+                        <ColorAnimation
+                            Storyboard.TargetProperty="Background.Color"
+                            To="{StaticResource ColorPrimary2}"
+                            Duration="0:0:0.1" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
         </Style.Triggers>
     </Style>
-    
+
 </ResourceDictionary>
