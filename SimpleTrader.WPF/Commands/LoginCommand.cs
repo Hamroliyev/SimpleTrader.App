@@ -3,11 +3,7 @@ using SimpleTrader.WPF.State.Authenticators;
 using SimpleTrader.WPF.State.Navigators;
 using SimpleTrader.WPF.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace SimpleTrader.WPF.Commands
 {
@@ -28,7 +24,7 @@ namespace SimpleTrader.WPF.Commands
         {
             try
             {
-                await _authenticator.Login(_loginViewModel.UserName, parameter.ToString());
+                await _authenticator.Login(_loginViewModel.UserName, _loginViewModel.Password);
 
                 _renavigator.Renavigate();
             }
