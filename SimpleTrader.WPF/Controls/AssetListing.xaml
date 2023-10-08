@@ -1,0 +1,44 @@
+﻿<UserControl
+    x:Class="SimpleTrader.WPF.Controls.AssetListing"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SimpleTrader.WPF.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <ListView BorderThickness="0" ItemsSource="{Binding TopAssets}">
+        <ListView.View>
+            <GridView>
+                <GridView.ColumnHeaderContainerStyle>
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="GridViewColumnHeader">
+                                    <Border
+                                        Padding="0,5,50,5"
+                                        BorderBrush="Gray"
+                                        BorderThickness="0,0,0,1">
+                                        <TextBlock Text="{TemplateBinding Content}" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </GridView.ColumnHeaderContainerStyle>
+
+                <GridViewColumn DisplayMemberBinding="{Binding Symbol}" Header="Symbol" />
+                <GridViewColumn DisplayMemberBinding="{Binding Shares}" Header="Shares" />
+            </GridView>
+        </ListView.View>
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+                <Setter Property="Margin" Value="0,10" />
+                <Setter Property="Foreground" Value="Black" />
+            </Style>
+        </ListView.ItemContainerStyle>
+    </ListView>
+</UserControl>
