@@ -13,7 +13,7 @@ namespace SimpleTrader.EntityFramework.Services
 {
     public class GenericDataService<T> : IDataService<T> where T : DomainObject
     {
-        public readonly SimpleTraderDbContextFactory _contextFactory;
+        private readonly SimpleTraderDbContextFactory _contextFactory;
         private readonly NonQueryDataService<T> _nonQueryDataService;
 
         public GenericDataService(SimpleTraderDbContextFactory contextFactory)
@@ -37,7 +37,6 @@ namespace SimpleTrader.EntityFramework.Services
             using (SimpleTraderDbContext context = _contextFactory.CreateDbContext())
             {
                 T entity = await context.Set<T>().FirstOrDefaultAsync((e) => e.Id == id);
-
                 return entity;
             }
         }
@@ -47,7 +46,6 @@ namespace SimpleTrader.EntityFramework.Services
             using (SimpleTraderDbContext context = _contextFactory.CreateDbContext())
             {
                 IEnumerable<T> entities = await context.Set<T>().ToListAsync();
-
                 return entities;
             }
         }

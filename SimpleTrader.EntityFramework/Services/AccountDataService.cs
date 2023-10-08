@@ -13,7 +13,7 @@ namespace SimpleTrader.EntityFramework.Services
 {
     public class AccountDataService : IAccountService
     {
-        public readonly SimpleTraderDbContextFactory _contextFactory;
+        private readonly SimpleTraderDbContextFactory _contextFactory;
         private readonly NonQueryDataService<Account> _nonQueryDataService;
 
         public AccountDataService(SimpleTraderDbContextFactory contextFactory)
@@ -21,6 +21,7 @@ namespace SimpleTrader.EntityFramework.Services
             _contextFactory = contextFactory;
             _nonQueryDataService = new NonQueryDataService<Account>(contextFactory);
         }
+
         public async Task<Account> Create(Account entity)
         {
             return await _nonQueryDataService.Create(entity);
@@ -35,11 +36,10 @@ namespace SimpleTrader.EntityFramework.Services
         {
             using (SimpleTraderDbContext context = _contextFactory.CreateDbContext())
             {
-                Account entity = await context.Accounts.
-                    Include(a => a.AccountHolder).
-                    Include(a => a.AssetTransactions).
-                    FirstOrDefaultAsync((e) => e.Id == id);
-
+                Account entity = await context.Accounts
+                    .Include(a => a.AccountHolder)
+                    .Include(a => a.AssetTransactions)
+                    .FirstOrDefaultAsync((e) => e.Id == id);
                 return entity;
             }
         }
@@ -48,34 +48,33 @@ namespace SimpleTrader.EntityFramework.Services
         {
             using (SimpleTraderDbContext context = _contextFactory.CreateDbContext())
             {
-                IEnumerable<Account> entities = await context.Accounts.
-                    Include(a => a.AccountHolder).
-                    Include(a => a.AssetTransactions).
-                    ToListAsync();
-
+                IEnumerable<Account> entities = await context.Accounts
+                    .Include(a => a.AccountHolder)
+                    .Include(a => a.AssetTransactions)
+                    .ToListAsync();
                 return entities;
             }
         }
 
-        public Task<Account> GetByEmail(string email)
+        public async Task<Account> GetByEmail(string email)
         {
             using (SimpleTraderDbContext context = _contextFactory.CreateDbContext())
             {
-                return context.Accounts.
-                    Include(a => a.AccountHolder).
-                    Include(a => a.AssetTransactions).
-                    FirstOrDefaultAsync(a => a.AccountHolder.Email == email);
+                return await context.Accounts
+                    .Include(a => a.AccountHolder)
+                    .Include(a => a.AssetTransactions)
+                    .FirstOrDefaultAsync(a => a.AccountHolder.Email == email);
             }
         }
 
-        public Task<Account> GetByUsername(string userName)
+        public async Task<Account> GetByUsername(string username)
         {
             using (SimpleTraderDbContext context = _contextFactory.CreateDbContext())
             {
-                return context.Accounts.
-                    Include(a => a.AccountHolder).
-                    Include(a => a.AssetTransactions).
-                    FirstOrDefaultAsync(a => a.AccountHolder.Username == userName);
+                return await context.Accounts
+                    .Include(a => a.AccountHolder)
+                    .Include(a => a.AssetTransactions)
+                    .FirstOrDefaultAsync(a => a.AccountHolder.Username == username);
             }
         }
 

@@ -19,9 +19,12 @@ namespace SimpleTrader.WPF.State.Authenticators
 
         public Account CurrentAccount
         {
-            get { return _accountStore.CurrentAccount; }
-            private set 
-            { 
+            get
+            {
+                return _accountStore.CurrentAccount;
+            }
+            private set
+            {
                 _accountStore.CurrentAccount = value;
                 StateChanged?.Invoke();
             }
@@ -36,7 +39,7 @@ namespace SimpleTrader.WPF.State.Authenticators
             CurrentAccount = await _authenticationService.Login(userName, password);
         }
 
-        public void LogOut()
+        public void Logout()
         {
             CurrentAccount = null;
         }
