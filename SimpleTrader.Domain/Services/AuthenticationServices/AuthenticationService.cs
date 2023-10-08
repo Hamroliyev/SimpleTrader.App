@@ -29,9 +29,9 @@ namespace SimpleTrader.Domain.Services.AuthenticationServices
                 throw new UserNotFoundException(userName);
             }
 
-            PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(storedAccount.AccountHolder.PasswordHash, password);
+            PasswordVerificationResult passwordResult = _passwordHasher.VerifyHashedPassword(storedAccount.AccountHolder.PasswordHash, password);
 
-            if (passwordVerificationResult != PasswordVerificationResult.Success)
+            if (passwordResult != PasswordVerificationResult.Success)
             {
                 throw new InvalidPasswordException(userName, password);
             }
