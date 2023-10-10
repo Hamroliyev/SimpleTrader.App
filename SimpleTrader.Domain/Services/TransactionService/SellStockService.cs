@@ -1,4 +1,5 @@
-﻿using SimpleTrader.Domain.Models;
+﻿using SimpleTrader.Domain.Exceptions;
+using SimpleTrader.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
