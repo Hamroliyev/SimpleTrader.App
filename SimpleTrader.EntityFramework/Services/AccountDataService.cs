@@ -67,14 +67,14 @@ namespace SimpleTrader.EntityFramework.Services
             }
         }
 
-        public async Task<Account> GetByUsername(string username)
+        public async Task<Account> GetByUsername(string userName)
         {
             using (SimpleTraderDbContext context = _contextFactory.CreateDbContext())
             {
                 return await context.Accounts
                     .Include(a => a.AccountHolder)
                     .Include(a => a.AssetTransactions)
-                    .FirstOrDefaultAsync(a => a.AccountHolder.Username == username);
+                    .FirstOrDefaultAsync(a => a.AccountHolder.Username == userName);
             }
         }
 
