@@ -64,6 +64,7 @@ namespace SimpleTrader.WPF
 
                     services.AddSingleton<ISimpleTraderViewModelFactory, SimpleTraderViewModelFactory>();
                     services.AddSingleton<BuyViewModel>();
+                    services.AddSingleton<SellViewModel>();
                     services.AddSingleton<PortfolioViewModel>();
                     services.AddSingleton<AssetSummaryViewModel>();
                     services.AddSingleton<HomeViewModel>(services => new HomeViewModel(
@@ -79,6 +80,11 @@ namespace SimpleTrader.WPF
                     services.AddSingleton<CreateViewModel<BuyViewModel>>(services =>
                     {
                         return () => services.GetRequiredService<BuyViewModel>();
+                    });
+
+                    services.AddSingleton<CreateViewModel<SellViewModel>>(services =>
+                    {
+                        return () => services.GetRequiredService<SellViewModel>();
                     });
 
                     services.AddSingleton<CreateViewModel<PortfolioViewModel>>(services =>
