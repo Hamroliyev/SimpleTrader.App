@@ -67,7 +67,9 @@
                 <RadioButton
                     Grid.Column="3"
                     Command="{Binding UpdateCurrentViewModelCommand}"
-                    Content="Sell" />
+                    CommandParameter="{x:Static nav:ViewType.Sell}"
+                    Content="Sell"
+                    IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type vm:SellViewModel}}" />
             </Grid>
         </Grid>
     </Grid>

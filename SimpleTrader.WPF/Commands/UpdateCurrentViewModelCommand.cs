@@ -1,12 +1,6 @@
-﻿using SimpleTrader.FinancialModelingPrepAPI.Services;
-using SimpleTrader.WPF.State.Navigators;
-using SimpleTrader.WPF.ViewModels;
+﻿using SimpleTrader.WPF.State.Navigators;
 using SimpleTrader.WPF.ViewModels.Factories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SimpleTrader.WPF.Commands
