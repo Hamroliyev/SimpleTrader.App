@@ -11,6 +11,7 @@ using SimpleTrader.EntityFramework;
 using SimpleTrader.EntityFramework.Services;
 using SimpleTrader.FinancialModelingPrepAPI;
 using SimpleTrader.FinancialModelingPrepAPI.Services;
+using SimpleTrader.WPF.HostBuilders;
 using SimpleTrader.WPF.State.Accounts;
 using SimpleTrader.WPF.State.Assets;
 using SimpleTrader.WPF.State.Authenticators;
@@ -38,17 +39,13 @@ namespace SimpleTrader.WPF
         public static IHostBuilder CreateHostBuilder(string[] args = null)
         {
             return Host.CreateDefaultBuilder(args)
-                
+                .AddConfiguration()
                 .ConfigureServices((context, services) =>
                 {
                     string apiKey = context.Configuration.GetValue<string>("FINANCE_API_KEY");
                     services.AddSingleton<FinancialModelingPrepHttpClientFactory>(new FinancialModelingPrepHttpClientFactory(apiKey));
 
-                    string connectionString = context.Configuration.GetConnectionString("sqlite");
-                    Action<DbContextOptionsBuilder> configureDbContext = o => o.UseSqlite(connectionString);
-
-                    services.AddDbContext<SimpleTraderDbContext>(configureDbContext);
-                    services.AddSingleton<SimpleTraderDbContextFactory>(new SimpleTraderDbContextFactory(configureDbContext));
+                    
                     services.AddSingleton<IAuthenticationService, AuthenticationService>();
                     services.AddSingleton<IDataService<Account>, AccountDataService>();
                     services.AddSingleton<IAccountService, AccountDataService>();
