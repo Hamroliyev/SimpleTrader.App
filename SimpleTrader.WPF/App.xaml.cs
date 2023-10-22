@@ -41,11 +41,7 @@ namespace SimpleTrader.WPF
             return Host.CreateDefaultBuilder(args)
                 .AddConfiguration()
                 .ConfigureServices((context, services) =>
-                {
-                    string apiKey = context.Configuration.GetValue<string>("FINANCE_API_KEY");
-                    services.AddSingleton<FinancialModelingPrepHttpClientFactory>(new FinancialModelingPrepHttpClientFactory(apiKey));
-
-                    
+                {                    
                     services.AddSingleton<IAuthenticationService, AuthenticationService>();
                     services.AddSingleton<IDataService<Account>, AccountDataService>();
                     services.AddSingleton<IAccountService, AccountDataService>();
