@@ -25,7 +25,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:SellViewModel}">
-                <views:SellView SelectedAssetChangedCommand="{Binding SearchSymbolCommand}"/>
+                <views:SellView SelectedAssetChangedCommand="{Binding SearchSymbolCommand}" />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">

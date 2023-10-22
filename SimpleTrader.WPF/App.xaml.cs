@@ -38,11 +38,7 @@ namespace SimpleTrader.WPF
         public static IHostBuilder CreateHostBuilder(string[] args = null)
         {
             return Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration(c =>
-                {
-                    c.AddJsonFile("appsettings.json");
-                    c.AddEnvironmentVariables();
-                })
+                
                 .ConfigureServices((context, services) =>
                 {
                     string apiKey = context.Configuration.GetValue<string>("FINANCE_API_KEY");
