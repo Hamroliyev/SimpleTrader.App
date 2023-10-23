@@ -7,7 +7,7 @@ namespace SimpleTrader.FinancialModelingPrepAPI.Services
 {
     public class MajorIndexService : IMajorIndexService
     {
-        private readonly FinancialModelingPrepHttpClient httpClient
+        private readonly FinancialModelingPrepHttpClient httpClient;
 
         public MajorIndexService(FinancialModelingPrepHttpClient httpClientFactory)
         {
