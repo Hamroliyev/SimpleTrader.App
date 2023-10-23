@@ -13,19 +13,18 @@ namespace SimpleTrader.FinancialModelingPrepAPI.Services
 {
     public class StockPriceService : IStockPriceService
     {
-        private readonly FinancialModelingPrepHttpClientFactory httpClientFactory;
+        private readonly FinancialModelingPrepHttpClient _httpClient;
 
-        public StockPriceService(FinancialModelingPrepHttpClientFactory httpClientFactory)
+        public StockPriceService(FinancialModelingPrepHttpClient httpClientFactory)
         {
-            this.httpClientFactory = httpClientFactory;
+            _httpClient = httpClientFactory;
         }
         public async Task<double> GetPrice(string symbol)
         {
-            using (FinancialModelingPrepHttpClient client = this.httpClientFactory.CreateHttpClient())
-            {
+           
                 string uri = "otc/real-time-price/" + symbol;
 
-                StockPriceResult stockPriceResult = await client.GetAsync<StockPriceResult>(uri);
+                StockPriceResult stockPriceResult = await _httpClient.GetAsync<StockPriceResult>(uri);
 
                 if (stockPriceResult.Price == 0)
                 {
@@ -33,7 +32,7 @@ namespace SimpleTrader.FinancialModelingPrepAPI.Services
                 }
 
                 return stockPriceResult.Price;
-            }
+            
         }
     }
 }
