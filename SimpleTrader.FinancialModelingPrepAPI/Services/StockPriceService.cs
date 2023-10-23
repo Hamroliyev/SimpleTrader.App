@@ -21,18 +21,16 @@ namespace SimpleTrader.FinancialModelingPrepAPI.Services
         }
         public async Task<double> GetPrice(string symbol)
         {
-           
-                string uri = "otc/real-time-price/" + symbol;
+            string uri = "otc/real-time-price/" + symbol;
 
-                StockPriceResult stockPriceResult = await _httpClient.GetAsync<StockPriceResult>(uri);
+            StockPriceResult stockPriceResult = await _httpClient.GetAsync<StockPriceResult>(uri);
 
-                if (stockPriceResult.Price == 0)
-                {
-                    throw new InvalidSymbolException(symbol);
-                }
+            if (stockPriceResult.Price == 0)
+            {
+                throw new InvalidSymbolException(symbol);
+            }
 
-                return stockPriceResult.Price;
-            
+            return stockPriceResult.Price;
         }
     }
 }
