@@ -1,16 +1,12 @@
 ﻿using SimpleTrader.Domain.Models;
 using SimpleTrader.Domain.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SimpleTrader.WPF.Commands;
+using System.Windows.Input;
 
 namespace SimpleTrader.WPF.ViewModels
 {
     public class MajorIndexListingViewModel : ViewModelBase
     {
-        private readonly IMajorIndexService _majorIndexService;
         private MajorIndex _dowJones;
         public MajorIndex DowJones
         {
@@ -24,11 +20,14 @@ namespace SimpleTrader.WPF.ViewModels
                 OnPropertyChanged(nameof(DowJones));
             }
         }
-        private MajorIndex _nasdaq;
 
+        private MajorIndex _nasdaq;
         public MajorIndex Nasdaq
         {
-            get { return _nasdaq; }
+            get
+            {
+                return _nasdaq;
+            }
             set
             {
                 _nasdaq = value;
@@ -37,50 +36,47 @@ namespace SimpleTrader.WPF.ViewModels
         }
 
         private MajorIndex _sp500;
-
         public MajorIndex SP500
         {
-            get { return _sp500; }
-            set 
-            { 
+            get
+            {
+                return _sp500;
+            }
+            set
+            {
                 _sp500 = value;
                 OnPropertyChanged(nameof(SP500));
             }
         }
-        
+
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
+
+        public ICommand LoadMajorIndexesCommand { get; }
+
         public MajorIndexListingViewModel(IMajorIndexService majorIndexService)
         {
-            _majorIndexService = majorIndexService;
+            LoadMajorIndexesCommand = new LoadMajorIndexesCommand(this, majorIndexService);
         }
+
         public static MajorIndexListingViewModel LoadMajorIndexViewModel(IMajorIndexService majorIndexService)
         {
             MajorIndexListingViewModel majorIndexViewModel = new MajorIndexListingViewModel(majorIndexService);
-            majorIndexViewModel.LoadMajorIndexes();
+
+            majorIndexViewModel.LoadMajorIndexesCommand.Execute(null);
+
             return majorIndexViewModel;
-        }
-        private void LoadMajorIndexes()
-        {
-            _majorIndexService.GetMajorIndex(indexType: MajorIndexType.DowJones).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    DowJones = task.Result;
-                }
-            });
-            _majorIndexService.GetMajorIndex(indexType: MajorIndexType.Nasdaq).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    Nasdaq = task.Result;
-                }
-            });
-            _majorIndexService.GetMajorIndex(indexType: MajorIndexType.SP500).ContinueWith(task =>
-            {
-                if (task.Exception == null)
-                {
-                    SP500 = task.Result;
-                }
-            });
         }
     }
 }
