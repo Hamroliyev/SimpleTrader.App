@@ -2,9 +2,8 @@
 using SimpleTrader.Domain.Services;
 using SimpleTrader.WPF.ViewModels;
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
 
 namespace SimpleTrader.WPF.Commands
 {
