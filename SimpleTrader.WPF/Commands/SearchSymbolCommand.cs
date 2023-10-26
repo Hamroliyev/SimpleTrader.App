@@ -17,11 +17,17 @@ namespace SimpleTrader.WPF.Commands
         {
             _viewModel = viewModel;
             _stockPriceService = stockPriceService;
+
+            _viewModel.PropertyChanged += ViewModel_PropertyChanged;
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.CanSearchSymbol && base.CanExecute(parameter);
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
-            _viewModel.ErrorMessage = string.Empty;
             try
             {
                 double stockPrice = await _stockPriceService.GetPrice(_viewModel.Symbol);
@@ -36,6 +42,14 @@ namespace SimpleTrader.WPF.Commands
             catch (Exception)
             {
                 _viewModel.ErrorMessage = "Failed to get symbol information.";
+            }
+        }
+
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ISearchSymbolViewModel.CanSearchSymbol))
+            {
+                OnCanExecuteChanged();
             }
         }
     }
