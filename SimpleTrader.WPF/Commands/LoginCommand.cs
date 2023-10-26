@@ -18,10 +18,19 @@ namespace SimpleTrader.WPF.Commands
             _loginViewModel = loginViewModel;
             _authenticator = authenticator;
             _renavigator = renavigator;
+
+            _loginViewModel.PropertyChanged += LoginViewModel_PropertyChanged;
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return _loginViewModel.CanLogin && base.CanExecute(parameter);
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
+            _loginViewModel.ErrorMessage = string.Empty;
+
             try
             {
                 await _authenticator.Login(_loginViewModel.UserName, _loginViewModel.Password);
@@ -30,7 +39,7 @@ namespace SimpleTrader.WPF.Commands
             }
             catch (UserNotFoundException)
             {
-                _loginViewModel.ErrorMessage = "UserName does not exist.";
+                _loginViewModel.ErrorMessage = "Username does not exist.";
             }
             catch (InvalidPasswordException)
             {
@@ -39,6 +48,14 @@ namespace SimpleTrader.WPF.Commands
             catch (Exception)
             {
                 _loginViewModel.ErrorMessage = "Login failed.";
+            }
+        }
+
+        private void LoginViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(LoginViewModel.CanLogin))
+            {
+                OnCanExecuteChanged();
             }
         }
     }
