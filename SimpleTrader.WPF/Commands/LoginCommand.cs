@@ -3,6 +3,7 @@ using SimpleTrader.WPF.State.Authenticators;
 using SimpleTrader.WPF.State.Navigators;
 using SimpleTrader.WPF.ViewModels;
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace SimpleTrader.WPF.Commands
