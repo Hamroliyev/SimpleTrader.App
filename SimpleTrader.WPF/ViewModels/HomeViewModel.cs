@@ -4,10 +4,19 @@
     {
         public AssetSummaryViewModel AssetSummaryViewModel { get; }
         public MajorIndexListingViewModel MajorIndexListingViewModel { get; }
+
         public HomeViewModel(AssetSummaryViewModel assetSummaryViewModel, MajorIndexListingViewModel majorIndexListingViewModel)
         {
             AssetSummaryViewModel = assetSummaryViewModel;
             MajorIndexListingViewModel = majorIndexListingViewModel;
+        }
+
+        public override void Dispose()
+        {
+            AssetSummaryViewModel.Dispose();
+            MajorIndexListingViewModel.Dispose();
+
+            base.Dispose();
         }
     }
 }

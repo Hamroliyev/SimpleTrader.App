@@ -1,6 +1,4 @@
 ﻿using SimpleTrader.WPF.State.Assets;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace SimpleTrader.WPF.ViewModels
@@ -25,5 +23,12 @@ namespace SimpleTrader.WPF.ViewModels
             OnPropertyChanged(nameof(AccountBalance));
         }
 
+        public override void Dispose()
+        {
+            _assetStore.StateChanged -= AssetStore_StateChanged;
+            AssetListingViewModel.Dispose();
+
+            base.Dispose();
+        }
     }
 }

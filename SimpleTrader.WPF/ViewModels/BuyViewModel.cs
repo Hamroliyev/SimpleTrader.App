@@ -17,8 +17,11 @@ namespace SimpleTrader.WPF.ViewModels
             { 
                 _symbol = value;
                 OnPropertyChanged(nameof(Symbol));
+                OnPropertyChanged(nameof(CanSearchSymbol));
             }
         }
+
+        public bool CanSearchSymbol => !string.IsNullOrEmpty(Symbol);
 
         private string  _searchResultSymbol = string.Empty;
 
@@ -88,6 +91,14 @@ namespace SimpleTrader.WPF.ViewModels
 
             SearchSymbolCommand = new SearchSymbolCommand(this, stockPriceService);
             BuyStockCommand = new BuyStockCommand(this, buyStockService, accountStore);
+        }
+
+        public override void Dispose()
+        {
+            ErrorMessageViewModel.Dispose();
+            StatusMessageViewModel.Dispose();
+
+            base.Dispose();
         }
     }
 }
